@@ -1,19 +1,19 @@
-function LRUCache(capacity) {
-  this.capacity = capacity;
-  this.cache = new Map();
-}
-LRUCache.prototype.get = function (key) {
-  if (!this.cache.has(key)) return -1;
-  const value = this.cache.get(key);
-  this.cache.delete(key);
-  this.cache.set(key, value);
-  return value;
-};
-LRUCache.prototype.put = function (key, value) {
-  if (this.cache.has(key)) this.cache.delete(key);
-  if (this.cache.size === this.capacity) {
-    const firstKey = this.cache.keys().next().value;
-    this.cache.delete(firstKey);
+function rotateRight(head, k) {
+  if (!head) return null;
+  let length = 1;
+  let tail = head;
+  while (tail.next) {
+    length++;
+    tail = tail.next;
   }
-  this.cache.set(key, value);
-};
+  k %= length;
+  if (k === 0) return head;
+  let newTail = head;
+  for (let i = 0; i < length - k - 1; i++) {
+    newTail = newTail.next;
+  }
+  const newHead = newTail.next;
+  newTail.next = null;
+  tail.next = head;
+  return newHead;
+}

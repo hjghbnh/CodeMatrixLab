@@ -1,11 +1,4 @@
-function reverseList(head) {
-  let prev = null;
-  let curr = head;
-  while (curr) {
-    const next = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = next;
-  }
-  return prev;
-}
+const factorial = (num) => {
+  if (num === 0) return 1;
+  return num * factorial(num - 1);
+};
